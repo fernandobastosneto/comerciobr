@@ -1,12 +1,12 @@
 Package: comerciobr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: dados de comércio em formato útil e tidy
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Fernando Bastos
+Maintainer: Fernando Bastos <fernando.bastos.neto@gmail.com>
+Description: dados de comércio retirados do Ministério da Economia.
+    em formato tidy e enxutos (para caber na memória) para alegria da galera.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
