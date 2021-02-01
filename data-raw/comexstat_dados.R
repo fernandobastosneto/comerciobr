@@ -172,4 +172,16 @@ sh6_df <- purrr::map_dfr(sh6_files, ~ vroom::vroom(.x, id = "path",
   dplyr::mutate(path = stringr::str_extract(path, "[:upper:]{3}")) %>%
   janitor::clean_names()
 
+dic_ncm_fatores <- dic_ncm_fatores %>%
+  janitor::clean_names()
+
+dic_sh6_sh1 <- dic_sh6_sh1 %>%
+  janitor::clean_names()
+
+dic_sh6_sh4 <- dic_sh6_sh4 %>%
+  janitor::clean_names()
+
+dic_paises <- dic_paises %>%
+  janitor::clean_names()
+
 usethis::use_data(sh1_df, sh4_df, sh6_df, dic_ncm_fatores, dic_sh6_sh1, dic_sh6_sh4, dic_paises, overwrite = TRUE)
