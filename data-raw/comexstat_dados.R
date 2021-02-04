@@ -358,9 +358,6 @@ dic_sh6_sh4 <- dic_sh6_sh4 %>%
 dic_paises <- dic_paises %>%
   janitor::clean_names()
 
-fatores_df <- fatores_df %>%
-  janitor::clean_names()
-
 usethis::use_data(cgce_df, cuci_df, fator_df, isic_df,
                   sh1_df, sh4_df, sh6_df,
                   dic_sh6_sh1,
