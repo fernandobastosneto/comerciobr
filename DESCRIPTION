@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Fernando Bastos
 Maintainer: Fernando Bastos <fernando.bastos.neto@gmail.com>
 Description: dados de comércio retirados do Ministério da Economia.
-    em formato tidy e enxutos (cabem na memória) para alegria da galera.
+    em formato tidy e enxutos (cabem na memória).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
