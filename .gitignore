@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 inst/
+temp/
 .Rdata
 .httr-oauth
 .DS_Store

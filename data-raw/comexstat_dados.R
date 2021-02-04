@@ -7,23 +7,23 @@ anos <- c(2026:2010)
 url_exp <- paste0("https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_")
 url_exp_lista <- purrr::map_chr(anos, ~ paste0(url_exp, .x, ".csv"))
 purrr::walk2(url_exp_lista, anos, ~ httr::GET(.x, config = httr::config(ssl_verifypeer = F),
-                                              httr::write_disk(paste0(here::here("inst", "extdata", "comex_stat/"), "EXP_", .y, ".csv"),
+                                              httr::write_disk(paste0(here::here("temp/"), "EXP_", .y, ".csv"),
                                                                overwrite = T)))
 
 url_imp <- paste0("https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_")
 url_imp_lista <- purrr::map_chr(anos, ~ paste0(url_imp, .x, ".csv"))
 purrr::walk2(url_imp_lista, anos, ~ httr::GET(.x, config = httr::config(ssl_verifypeer = F),
-                                              httr::write_disk(paste0(here::here("inst", "extdata", "comex_stat/"), "IMP_", .y, ".csv"),
+                                              httr::write_disk(paste0(here::here("temp/"), "IMP_", .y, ".csv"),
                                                                overwrite = T)))
 
-files_exp <- fs::dir_ls(here::here("inst", "extdata", "comex_stat"), regexp = "EXP")
+files_exp <- fs::dir_ls(here::here("temp"), regexp = "EXP")
 
 files_exp <- purrr::map_dfr(files_exp, file.info, .id = "path") %>%
   tibble::as_tibble() %>%
   dplyr::filter(size > 25000) %>%
   dplyr::pull(path)
 
-files_imp <- fs::dir_ls(here::here("inst", "extdata", "comex_stat"), regexp = "IMP")
+files_imp <- fs::dir_ls(here::here("temp"), regexp = "IMP")
 
 files_imp <- purrr::map_dfr(files_imp, file.info, .id = "path") %>%
   tibble::as_tibble() %>%
@@ -83,7 +83,11 @@ get_sh6 <- function(file) {
     dplyr::left_join(ncm_sh6) %>%
     dplyr::group_by(CO_ANO, CO_MES, CO_PAIS, CO_SH6) %>%
     dplyr::summarise(value = sum(VL_FOB)) %>%
+<<<<<<< HEAD
+    vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
+=======
     vroom::vroom_write(paste0(here::here("inst", "extdata", "comex_stat", "filtrados/", nome)))
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 }
 
 purrr::walk(files_exp, get_sh6)
@@ -91,8 +95,13 @@ purrr::walk(files_imp, get_sh6)
 
 # pegar produto em sh4
 
+<<<<<<< HEAD
+exp_sh6 <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "EXP_\\d{4}_sh6.csv$")
+imp_sh6 <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "IMP_\\d{4}_sh6.csv$")
+=======
 exp_sh6 <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "EXP_\\d{4}_sh6.csv$")
 imp_sh6 <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "IMP_\\d{4}_sh6.csv$")
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 get_sh4 <- function(file) {
 
@@ -110,7 +119,11 @@ get_sh4 <- function(file) {
     dplyr::left_join(dic_sh6_sh4) %>%
     dplyr::group_by(CO_ANO, CO_MES, CO_PAIS, CO_SH4) %>%
     dplyr::summarise(value = sum(value)) %>%
+<<<<<<< HEAD
+    vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
+=======
     vroom::vroom_write(paste0(here::here("inst", "extdata", "comex_stat", "filtrados/", nome)))
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 }
 dic_sh6_sh4
@@ -137,7 +150,11 @@ get_sh1 <- function(file) {
     dplyr::left_join(dic_sh6_sh1) %>%
     dplyr::group_by(CO_ANO, CO_MES, CO_PAIS, CO_NCM_SECROM) %>%
     dplyr::summarise(value = sum(value)) %>%
+<<<<<<< HEAD
+    vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
+=======
     vroom::vroom_write(paste0(here::here("inst", "extdata", "comex_stat", "filtrados/", nome)))
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 }
 
 purrr::walk(exp_sh6, get_sh1)
@@ -164,7 +181,11 @@ get_fatores <- function(file) {
     dplyr::left_join(dic_ncm_fatores) %>%
     dplyr::group_by(CO_PPE, CO_PPI, CO_FAT_AGREG, CO_ISIC_CLASSE, CO_ANO, CO_PAIS) %>%
     dplyr::summarise(value = sum(value))%>%
+<<<<<<< HEAD
+    vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
+=======
     vroom::vroom_write(paste0(here::here("inst", "extdata", "comex_stat", "filtrados/", nome)))
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 }
 
 purrr::walk(files_exp, get_fatores)
@@ -173,14 +194,22 @@ purrr::walk(files_imp, get_fatores)
 
 # pegar nome do país
 
+<<<<<<< HEAD
+sh1_files <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "sh1.csv$")
+=======
 sh1_files <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "sh1.csv$")
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 sh1_df <- purrr::map_dfr(sh1_files, ~ vroom::vroom(.x, id = "path")) %>%
   dplyr::mutate(path = stringr::str_extract(path, "[:upper:]{3}")) %>%
   dplyr::left_join(dic_paises) %>%
   janitor::clean_names()
 
+<<<<<<< HEAD
+sh4_files <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "sh4.csv$")
+=======
 sh4_files <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "sh4.csv$")
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 sh4_df <- purrr::map_dfr(sh4_files, ~ vroom::vroom(.x, id = "path",
                                                         col_types = c(path = "c", CO_ANO = "i",
@@ -190,7 +219,11 @@ sh4_df <- purrr::map_dfr(sh4_files, ~ vroom::vroom(.x, id = "path",
   dplyr::left_join(dic_paises) %>%
   janitor::clean_names()
 
+<<<<<<< HEAD
+sh6_files <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "sh6.csv$")
+=======
 sh6_files <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "sh6.csv$")
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 sh6_df <- purrr::map_dfr(sh6_files, ~ vroom::vroom(.x, id = "path",
                                                         col_types = c(path = "c", CO_ANO = "i",
@@ -199,7 +232,11 @@ sh6_df <- purrr::map_dfr(sh6_files, ~ vroom::vroom(.x, id = "path",
   dplyr::mutate(path = stringr::str_extract(path, "[:upper:]{3}")) %>%
   janitor::clean_names()
 
+<<<<<<< HEAD
+fatores_files <- fs::dir_ls(here::here("temp", "filtrados"), regexp = "fatores.csv$")
+=======
 fatores_files <- fs::dir_ls(here::here("inst", "extdata", "comex_stat", "filtrados"), regexp = "fatores.csv$")
+>>>>>>> 3d367020ceb9a83e4b6b09d0ec751362ab42f7f3
 
 fatores_df <- purrr::map_dfr(fatores_files, ~ vroom::vroom(.x, id = "path",
                                                            col_types = c(CO_PPE = "c",
