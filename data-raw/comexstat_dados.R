@@ -97,7 +97,6 @@ dic_ncm_set <- readxl::read_excel(here::here("data-raw", "tabelas_auxiliares.xls
                    sheet = 11) %>%
   dplyr::select(CO_NCM, CO_EXP_SET,	NO_EXP_SET)
 
-
 # pegar produto em sh6
 
 get_sh6 <- function(file) {
