@@ -61,8 +61,6 @@ dic_paises <- vroom::vroom(here::here("data-raw", "dic_paises.csv"),
                            col_select = c("CO_PAIS", "NO_PAIS"),
                            locale = vroom::locale(encoding = "ISO-8859-1"))
 
-
-
 # CUCI
 
 dic_ncm_cuci <- readxl::read_excel(here::here("data-raw", "tabelas_auxiliares.xlsx"),
