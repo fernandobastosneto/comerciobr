@@ -48,9 +48,15 @@ dic_sh6_sh4 <- vroom::vroom(here::here("data-raw", "sh.csv"),
                             col_select = c("CO_SH6", "NO_SH4_POR", "CO_SH4"),
                             locale = vroom::locale(encoding = "ISO-8859-1"))
 
-dic_sh6_sh1 <- vroom::vroom(here::here("data-raw", "sh.csv"),
-                            col_select = c("CO_SH6", "CO_NCM_SECROM"),
+dic_sh6_sh2 <- vroom::vroom(here::here("data-raw", "sh.csv"),
+                            col_select = c("CO_SH6", "CO_SH2", "NO_SH2_POR"),
                             locale = vroom::locale(encoding = "ISO-8859-1"))
+
+dic_sh6_sh1 <- vroom::vroom(here::here("data-raw", "sh.csv"),
+                            col_select = c("CO_SH6", "CO_NCM_SECROM", "NO_SEC_POR"),
+                            locale = vroom::locale(encoding = "ISO-8859-1"))
+
+
 
 httr::GET("https://balanca.economia.gov.br/balanca/bd/tabelas/PAIS.csv",
           config = httr::config(ssl_verifypeer = F),
@@ -336,7 +342,6 @@ isic_df <- purrr::map_dfr(isic_files, ~ vroom::vroom(.x, id = "path",
   dplyr::mutate(path = stringr::str_extract(path, "[:upper:]{3}")) %>%
   janitor::clean_names()
 
-
 dic_ncm_fator <- dic_ncm_fator %>%
   janitor::clean_names()
 
@@ -360,7 +365,7 @@ dic_paises <- dic_paises %>%
 
 usethis::use_data(cgce_df, cuci_df, fator_df, isic_df,
                   sh1_df, sh4_df, sh6_df,
-                  dic_sh6_sh1,
+                  dic_sh6_sh1, dic_sh6_sh2,
                   dic_sh6_sh4, dic_paises,
                   dic_ncm_cgce, dic_ncm_cuci,
                   dic_ncm_fator, dic_ncm_isic, overwrite = T)
