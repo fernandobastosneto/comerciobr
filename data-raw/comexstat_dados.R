@@ -67,6 +67,10 @@ dic_paises <- vroom::vroom(here::here("data-raw", "dic_paises.csv"),
                            col_select = c("CO_PAIS", "NO_PAIS"),
                            locale = vroom::locale(encoding = "ISO-8859-1"))
 
+dic_paises_isoa3 <- vroom::vroom(here::here("data-raw", "dic_paises.csv"),
+                           col_select = c("CO_PAIS", "CO_PAIS_ISOA3", "NO_PAIS_ING", "NO_PAIS"),
+                           locale = vroom::locale(encoding = "ISO-8859-1"))
+
 # CUCI
 
 dic_ncm_cuci <- readxl::read_excel(here::here("data-raw", "tabelas_auxiliares.xlsx"),
@@ -363,9 +367,13 @@ dic_sh6_sh4 <- dic_sh6_sh4 %>%
 dic_paises <- dic_paises %>%
   janitor::clean_names()
 
+dic_paises_isoa3 <- dic_paises_isoa3 %>%
+  janitor::clean_names()
+
 usethis::use_data(cgce_df, cuci_df, fator_df, isic_df,
                   sh1_df, sh4_df, sh6_df,
                   dic_sh6_sh1, dic_sh6_sh2,
                   dic_sh6_sh4, dic_paises,
+                  dic_paises_isoa3,
                   dic_ncm_cgce, dic_ncm_cuci,
                   dic_ncm_fator, dic_ncm_isic, overwrite = T)
