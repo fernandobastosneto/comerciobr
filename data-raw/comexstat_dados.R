@@ -370,10 +370,13 @@ dic_paises <- dic_paises %>%
 dic_paises_isoa3 <- dic_paises_isoa3 %>%
   janitor::clean_names()
 
+dic_blocos <- vroom::vroom(here::here("data-raw", "dic_blocos.csv")) %>%
+  janitor::clean_names()
+
 usethis::use_data(cgce_df, cuci_df, fator_df, isic_df,
                   sh1_df, sh4_df, sh6_df,
                   dic_sh6_sh1, dic_sh6_sh2,
                   dic_sh6_sh4, dic_paises,
-                  dic_paises_isoa3,
+                  dic_paises_isoa3, dic_blocos,
                   dic_ncm_cgce, dic_ncm_cuci,
                   dic_ncm_fator, dic_ncm_isic, overwrite = T)

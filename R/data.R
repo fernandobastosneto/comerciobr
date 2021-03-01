@@ -158,7 +158,10 @@ NULL
 #' Correlaciona produtos do Sistema Harmonizado em SH6 para SH1.
 "dic_sh6_sh1"
 
-
+#' Lista de Blocos de Países
+#'
+#' Correlaciona países a blocos.
+"dic_blocos"
 
 
 
