@@ -20,14 +20,14 @@ files_exp <- fs::dir_ls(here::here("temp"), regexp = "EXP")
 
 files_exp <- purrr::map_dfr(files_exp, file.info, .id = "path") %>%
   tibble::as_tibble() %>%
-  dplyr::filter(size > 25000) %>%
+  dplyr::filter(size > 250000) %>%
   dplyr::pull(path)
 
 files_imp <- fs::dir_ls(here::here("temp"), regexp = "IMP")
 
 files_imp <- purrr::map_dfr(files_imp, file.info, .id = "path") %>%
   tibble::as_tibble() %>%
-  dplyr::filter(size > 25000) %>%
+  dplyr::filter(size > 250000) %>%
   dplyr::pull(path)
 
 # Baixa Dicionários
