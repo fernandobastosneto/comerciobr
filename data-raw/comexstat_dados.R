@@ -3,6 +3,11 @@
 
 library(magrittr)
 
+if(!fs::dir_exists(here::here("temp/"))) {
+  fs::dir_create("temp")
+  fs::dir_create("temp/filtrados")
+}
+
 anos <- c(2026:2010)
 url_exp <- paste0("https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_")
 url_exp_lista <- purrr::map_chr(anos, ~ paste0(url_exp, .x, ".csv"))
