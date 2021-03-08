@@ -14,3 +14,5 @@ Depends:
 URL: https://github.com/fernandobastosneto/comerciobr
 BugReports: https://github.com/fernandobastosneto/comerciobr/issues
 RoxygenNote: 7.1.1
+Suggests: 
+    covr

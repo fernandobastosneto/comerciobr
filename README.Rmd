@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # comerciobr
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/fernandobastosneto/comerciobr/branch/master/graph/badge.svg)](https://codecov.io/gh/fernandobastosneto/comerciobr?branch=master)
+[![R-CMD-check](https://github.com/fernandobastosneto/comerciobr/workflows/R-CMD-check/badge.svg)](https://github.com/fernandobastosneto/comerciobr/actions)
 <!-- badges: end -->
 
 Dados de comercio brasileiro, retirados do Ministério da Economia, que cabem na sua memória. O pacote oferece dados de 2010 em diante, em diferentes opções: dados agregados em SH6, SH4 ou SH1, de 2010 em diante. Também oferece dados consolidados, discriminados por país e ano, para as quatro classificações de comercio exterior oferecidas pelo Minsitério da Economia: CGCE, CUCI, ISIC e Fator Agregado.

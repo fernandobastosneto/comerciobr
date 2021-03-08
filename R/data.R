@@ -148,10 +148,22 @@ NULL
 #' com os nomes na grafia estabelecidas pelo Ministério da Economia.
 "dic_paises"
 
+
+#' Dicionário de Correlação Códigos Países - Nomes de Países e ISOA3
+#'
+#' Correlaciona países, seguindo os códigos oferecidos pelo Ministério da Economia,
+#' com os nomes na grafia estabelecidas pelo Ministério da Economia.
+"dic_paises_isoa3"
+
 #' Dicionário de Correlação SH6 - SH4
 #'
 #' Correlaciona produtos do Sistema Harmonizado em SH6 para SH4.
 "dic_sh6_sh4"
+
+#' Dicionário de Correlação SH6 - SH1
+#'
+#' Correlaciona produtos do Sistema Harmonizado em SH6 para SH2.
+"dic_sh6_sh2"
 
 #' Dicionário de Correlação SH6 - SH1
 #'
