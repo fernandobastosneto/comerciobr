@@ -1,0 +1,49 @@
+on:
+  schedule:
+  - cron: "0 0 7 * *"
+  push:
+    branches:
+      - master
+
+name: update-data
+
+jobs:
+  render:
+    name: update-data
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: r-lib/actions/setup-r@v1
+      - name: Install remotes, and the local package
+        run: |
+          install.packages("remotes")
+          remotes::install_local(".")
+          remotes::install_cran("tidyverse")
+          remotes::install_cran("dplyr")
+          remotes::install_cran("usethis")
+          remotes::install_cran("vroom")
+          remotes::install_cran("httr")
+          remotes::install_cran("janitor")
+          remotes::install_cran("purrr")
+          remotes::install_cran("here")
+          remotes::install_cran("magrittr")
+          remotes::install_cran("fs")
+          remotes::install_cran("tibble")
+          remotes::install_cran("readxl")
+          remotes::install_cran("stringr")
+        shell: Rscript {0}
+
+      - name: Execute Script
+        run: |
+          source('data-raw/comexstat_dados.R')
+        shell: Rscript {0}
+
+      - name: Commit results
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m 'Update data' || echo "Update data"
+          git push origin || echo "Update data"
