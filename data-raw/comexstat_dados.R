@@ -49,18 +49,25 @@ httr::GET("https://balanca.economia.gov.br/balanca/bd/tabelas/NCM_SH.csv",
           httr::write_disk(here::here("data-raw", "sh.csv"),
                            overwrite = T))
 
-dic_sh6_sh4 <- vroom::vroom(here::here("data-raw", "sh.csv"),
-                            col_select = c("CO_SH6", "NO_SH4_POR", "CO_SH4"),
-                            locale = vroom::locale(encoding = "ISO-8859-1"))
+dic_sh6_sh4 <- readr::read_csv2(here::here("data-raw", "sh.csv"),
+                                locale = readr::locale(encoding = "ISO-8859-1")) %>%
+  dplyr::select("CO_SH6", "NO_SH4_POR", "CO_SH4")
 
-dic_sh6_sh2 <- vroom::vroom(here::here("data-raw", "sh.csv"),
-                            col_select = c("CO_SH6", "CO_SH2", "NO_SH2_POR"),
-                            locale = vroom::locale(encoding = "ISO-8859-1"))
+dic_sh6_sh2 <- readr::read_csv2(here::here("data-raw", "sh.csv"),
+                                locale = readr::locale(encoding = "ISO-8859-1")) %>%
+  dplyr::select(CO_SH6, CO_SH2, NO_SH2_POR)
 
-dic_sh6_sh1 <- vroom::vroom(here::here("data-raw", "sh.csv"),
-                            col_select = c("CO_SH6", "CO_NCM_SECROM", "NO_SEC_POR"),
-                            locale = vroom::locale(encoding = "ISO-8859-1"))
+# dic_sh6_sh2 <- readr::read_csv2(here::here("data-raw", "sh.csv"),
+#                             col_select = c("CO_SH6", "CO_SH2", "NO_SH2_POR"),
+#                             locale = vroom::locale(encoding = "ISO-8859-1"))
 
+dic_sh6_sh1 <- readr::read_csv2(here::here("data-raw", "sh.csv"),
+                                locale = readr::locale(encoding = "ISO-8859-1")) %>%
+  dplyr::select(CO_SH6, CO_NCM_SECROM, NO_SEC_POR)
+
+# dic_sh6_sh1 <- vroom::vroom(here::here("data-raw", "sh.csv"),
+#                             col_select = c("CO_SH6", "CO_NCM_SECROM", "NO_SEC_POR"),
+#                             locale = vroom::locale(encoding = "ISO-8859-1"))
 
 
 httr::GET("https://balanca.economia.gov.br/balanca/bd/tabelas/PAIS.csv",
@@ -160,7 +167,6 @@ get_sh4 <- function(file) {
     vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
 
 }
-dic_sh6_sh4
 vroom::vroom(exp_sh6[4])
 
 purrr::walk(exp_sh6, get_sh4)
@@ -189,10 +195,6 @@ get_sh1 <- function(file) {
 
 purrr::walk(exp_sh6, get_sh1)
 purrr::walk(imp_sh6, get_sh1)
-
-dic_sh6_sh4 <- dic_sh6_sh4 %>%
-  dplyr::select(NO_SH4_POR, CO_SH4) %>%
-  dplyr::distinct()
 
 get_fator <- function(file) {
 
@@ -364,6 +366,9 @@ dic_ncm_isic <- dic_ncm_isic %>%
   janitor::clean_names()
 
 dic_sh6_sh1 <- dic_sh6_sh1 %>%
+  janitor::clean_names()
+
+dic_sh6_sh2 <- dic_sh6_sh2 %>%
   janitor::clean_names()
 
 dic_sh6_sh4 <- dic_sh6_sh4 %>%
