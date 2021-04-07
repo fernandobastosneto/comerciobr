@@ -167,7 +167,6 @@ get_sh4 <- function(file) {
     vroom::vroom_write(paste0(here::here("temp", "filtrados/", nome)))
 
 }
-vroom::vroom(exp_sh6[4])
 
 purrr::walk(exp_sh6, get_sh4)
 purrr::walk(imp_sh6, get_sh4)
