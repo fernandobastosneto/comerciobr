@@ -1,4 +1,3 @@
-## code to prepare `comexstat_dados` dataset goes here
 # baixa csvs de do comexstat
 
 library(magrittr)
