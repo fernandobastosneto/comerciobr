@@ -389,3 +389,5 @@ usethis::use_data(cgce_df, cuci_df, fator_df, isic_df,
                   dic_paises_isoa3, dic_blocos,
                   dic_ncm_cgce, dic_ncm_cuci,
                   dic_ncm_fator, dic_ncm_isic, overwrite = T)
+
+devtools::install()
