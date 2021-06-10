@@ -33,6 +33,7 @@ jobs:
           remotes::install_cran("tibble")
           remotes::install_cran("readxl")
           remotes::install_cran("stringr")
+          remotes::install_cran("devtools")
         shell: Rscript {0}
 
       - name: Execute Script
